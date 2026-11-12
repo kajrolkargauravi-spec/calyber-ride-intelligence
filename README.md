@@ -1,128 +1,165 @@
-# calyber-ride-intelligence
-An interactive ride-hailing fare intelligence platform for Mumbai, analysing 54,132 trips to explore surge pricing, fare prediction, pricing fairness, and fairness-aware policy alternatives.
+# CALYBER — Fair Pricing Intelligence for Mumbai Ride-Hailing
 
-# CALYBER – Fair Pricing Intelligence for Mumbai Ride-Hailing
+Calyber is a ride-hailing fare and pricing fairness exploration project focused on Mumbai. It analyses a dataset of **54,132 trip records** and provides an interactive Streamlit application for examining fare patterns, surge pricing, rider vulnerability, and a proposed fairer pricing policy.
 
-## Exploring Fare Prediction, Surge Pricing and Pricing Fairness Through Data Analytics
+The application brings together fare forecasting, fairness indicators, trip scenario comparisons, and exploratory analytics to help users understand how factors such as time, weather, vehicle type, and rider circumstances can affect estimated trip costs.
 
-CALYBER is an interactive data-driven application designed to analyse ride-hailing fares, investigate surge pricing patterns, and explore pricing fairness in Mumbai.
+> **Note:** Calyber is an analytical and demonstration project, not a live connection to a ride-hailing provider. Forecasts and policy comparisons are based on the assumptions and calculations implemented in this repository. They should not be interpreted as live market quotes or verified platform prices.
 
-Using a dataset of **54,132 trip records,** the project examines how factors such as demand, weather, time of day, vehicle type, and rider circumstances influence ride-hailing prices.
+## Project Goals
 
-Built using Python, Streamlit, Pandas, Scikit-learn, and Plotly, CALYBER provides an interactive platform for fare estimation, scenario analysis, and exploring fairness-aware pricing alternatives.
+- Explore how ride-hailing fares and surge multipliers vary across trip conditions.
+- Highlight pricing patterns for riders with fewer alternatives.
+- Provide fare, wait-time, and cancellation-risk estimates for user-selected scenarios.
+- Compare current scenario estimates with a proposed fairness-aware policy.
+- Present the analysis through an accessible interactive dashboard.
 
-## Project Overview
+## Features
 
-Ride-hailing platforms frequently use dynamic pricing mechanisms to adjust fares based on demand, availability, weather, and other conditions.
+### Predict
+- Fare forecast across upcoming time intervals.
+- Fairness score based on estimated surge and rider-vulnerability category.
+- Estimated wait time.
+- Estimated cancellation risk.
+- Surge timing analysis.
+- Fare anomaly check against the project's expected-fare calculation.
 
-While surge pricing helps balance demand and supply, it can also create affordability concerns for riders with limited transportation alternatives.
+### Decide
+- Vehicle recommendation based on trip distance and selected priorities.
+- What-if analysis for alternative trip conditions.
 
-CALYBER explores these challenges through data analytics and interactive scenario modelling, with a focus on understanding pricing patterns and evaluating alternative approaches to fairer ride-hailing prices.
+### Compare
+- Route and fare comparison.
+- Scenario and policy comparison to explore the effect of a fairness-aware pricing approach.
 
-## Key Features
-
-**1. Predict**
-
-- **Fare Forecast:** Estimates ride fares under different trip conditions.
-
-- **Fairness Score** Evaluates pricing fairness using project-defined indicators.
-
-- **Wait Time Forecast**: Estimates expected waiting times.
-
-- **Cancellation Risk:** Provides estimated cancellation risk.
-
-- **Surge Timing:** Explores surge pricing patterns across different time intervals.
-
-- **Anomaly Detection:** Identifies potentially unusual fare estimates.
-
-**2. Decide**
-
-- **Vehicle Recommender:** Helps compare vehicle options based on trip requirements.
-
-- **What-If Explorer:** Allows users to explore how changing trip conditions can affect estimated fares.
-
-**3. Compare**
-
-- **Route Comparison:** Examines differences in estimated fares across routes.
-
-- **Policy Simulator:** Explores the potential impact of alternative pricing policies.
-
-- **Fairness Analysis:** Investigates pricing patterns across different rider groups.
-
-**4. Explore**
-
-- **Data Explorer:** Provides interactive exploration of trip-level records.
-
-- **Demand Analysis:** Examines demand patterns across different days and hours.
-
-- **Weather Analysis:** Explores the relationship between weather conditions and ride-hailing prices.
-
-- **Interactive Visualisations:** Presents analytical insights through charts and dashboards.
+### Explore
+- Summary metrics and trip-level data exploration.
+- Analysis by weather, demand, and rider-vulnerability groups.
 
 ## Dataset
 
-The project uses a dataset containing **54,132 ride-hailing trip records.**
+The project includes prepared CSV files used by the dashboard:
 
-The application includes supporting datasets for:
+- `pbi_trips.csv` — trip-level records used for the main analysis.
+- `pbi_captive.csv` — summary metrics by rider-vulnerability quartile.
+- `pbi_demand.csv` — demand summaries by day and hour.
+- `pbi_kpi.csv` — dashboard KPI values.
+- `pbi_weather.csv` — summary metrics by weather condition.
+- `surge_patterns.csv` — hourly surge patterns by weather condition.
 
-- Trip-level information.
+The trip dataset contains **54,132 records**. Review and document the original data source, collection method, and whether the records are synthetic or anonymised before publishing or reusing the data.
 
-- Rider vulnerability analysis.
+## Methodology and Interpretation
 
-- Demand patterns by day and hour.
+Calyber combines historical-pattern exploration with scenario calculations and a proposed policy simulation. The application code contains explicit fare-rate, time-of-day, weather, and rider-vulnerability assumptions.
 
-- Key performance indicators.
+A serialized demand-model artifact (`demand_model.pkl`) is included and loaded by the application. The current fare and scenario functions in `predictions.py` use the project's defined calculation rules; do not interpret every displayed estimate as a direct output from the serialized model.
 
-- Weather-based analysis.
+The fairness indicators and policy comparisons are analytical measures defined for this project. They are not official regulatory standards or proof of discriminatory conduct by any specific ride-hailing company.
 
-- Surge pricing patterns.
+## Technology Stack
 
-These datasets support the exploration of pricing behaviour, demand fluctuations, and potential affordability concerns.
+- Python
+- Streamlit
+- Pandas
+- NumPy
+- Scikit-learn
+- Plotly
+- Pickle for model serialization
+- HTML/CSS for dashboard styling
 
-## Project Highlights
+## Repository Structure
 
-- Analysed 54,132 ride-hailing trip records.
+```text
+Calyber/
+├── app.py
+├── components.py
+├── predictions.py
+├── styles.css
+├── demand_model.pkl
+├── pbi_trips.csv
+├── pbi_captive.csv
+├── pbi_demand.csv
+├── pbi_kpi.csv
+├── pbi_weather.csv
+├── surge_patterns.csv
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── .streamlit/
+    └── config.toml
+```
 
-- Explored dynamic pricing and surge multiplier patterns.
+## Run Locally
 
-- Investigated the relationship between demand, weather, and ride fares.
+Python 3.12 is recommended.
 
-- Developed interactive fare estimation and scenario analysis features.
+### 1. Clone the repository
 
-- Explored rider vulnerability and pricing fairness.
+```bash
+git clone https://github.com/YOUR-USERNAME/calyber.git
+cd calyber
+```
 
-- Implemented a policy simulation to examine alternative pricing approaches.
+### 2. Create a virtual environment
 
-- Developed an interactive Streamlit dashboard for presenting analytical insights.
+**Windows (PowerShell):**
 
-## Pricing Fairness and Policy Analysis
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
 
-An important objective of CALYBER is to explore the potential relationship between dynamic pricing and rider affordability.
+**macOS / Linux:**
 
-The application uses project-defined fairness indicators to examine differences in pricing patterns across rider vulnerability categories.
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-Its policy simulator allows users to explore how alternative pricing rules could influence estimated fares and pricing fairness.
+### 3. Install dependencies
 
-These analyses are intended to support discussion and exploration of more transparent and equitable ride-hailing pricing approaches.
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 4. Run the application
+
+```bash
+streamlit run app.py
+```
+
+The application will normally be available at `http://localhost:8501`.
+
+## Deploy on Streamlit Community Cloud
+
+1. Push this repository to GitHub.
+2. Open Streamlit Community Cloud and sign in with GitHub.
+3. Create a new app and select this repository and branch.
+4. Set the main file path to `app.py`.
+5. Select Python 3.12 in the app's advanced settings.
+6. Deploy the application.
+
+Keep the CSV files, `demand_model.pkl`, `predictions.py`, `components.py`, `styles.css`, and `.streamlit/config.toml` in the repository because the application depends on them.
 
 ## Limitations
 
-- The analysis depends on the available dataset and its coverage.
-
-- Fare, waiting-time, and cancellation-risk outputs are estimates rather than live predictions from ride-hailing platforms.
-
-- Fairness scores are based on project-defined indicators and should not be interpreted as official fairness certifications.
-
-- Policy simulation results depend on the assumptions and calculations implemented in the application.
-
-- The findings should not be generalised to all ride-hailing platforms or locations without further validation.
+- Results depend on the supplied dataset and the assumptions encoded in the application.
+- Estimated fares, wait times, and cancellation risks are scenario estimates, not live provider data.
+- The fairness score is a project-defined indicator and should not be treated as an official fairness certification.
+- The quality and generalisability of conclusions depend on the dataset's provenance, coverage, and representativeness.
+- The serialized model's training details and evaluation metrics should be documented separately if they are available.
 
 ## Author
 
 **Gauravi Kajrolkar**
 
-Data Science | Machine Learning | Data Analytics
+Data Science | Machine Learning | Analytics
+
+- LinkedIn: https://www.linkedin.com/in/gauravi-k-976669313
+- GitHub: https://github.com/YOUR-USERNAME
 
 ## Acknowledgement
 
-Developed as an analytical and design-thinking project exploring ride-hailing fare transparency, surge pricing, and pricing fairness in Mumbai.
+Developed as a design-thinking and analytical project exploring ride-hailing fare transparency and pricing fairness in Mumbai.
